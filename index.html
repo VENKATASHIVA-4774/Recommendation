@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A Page</title>
+</head>
+<body>
+    <h1>Question and Answer Page</h1>
+
+    <h2>Ask a Question</h2>
+    <form id="questionForm">
+        <label for="question">Your Question:</label>
+        <input type="text" id="question" name="question" required>
+        <br>
+        <button type="submit">Submit Question</button>
+    </form>
+
+    <h2>Answer a Question</h2>
+    <form id="answerForm">
+        <label for="questionSelect">Select a Question:</label>
+        <select id="questionSelect" name="questionSelect" required>
+            <!-- You can populate this dropdown with existing questions dynamically -->
+            <option value="question1">Question 1</option>
+            <option value="question2">Question 2</option>
+            <option value="question3">Question 3</option>
+        </select>
+        <br>
+        <label for="answer">Your Answer:</label>
+        <textarea id="answer" name="answer" rows="4" required></textarea>
+        <br>
+        <button type="submit">Submit Answer</button>
+    </form>
+
+    <h2>Questions and Answers</h2>
+    <ul id="qaList">
+        <!-- Display questions and answers here -->
+    </ul>
+
+    <script>
+        // JavaScript code to handle form submissions and display questions/answers
+        document.getElementById("questionForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const question = document.getElementById("question").value;
+            // You can store the question in a database or display it on the page
+            // For now, let's just add it to the list of questions and answers
+            const qaList = document.getElementById("qaList");
+            const listItem = document.createElement("li");
+            listItem.textContent = `Question: ${question}`;
+            qaList.appendChild(listItem);
+            document.getElementById("question").value = ""; // Clear the input field
+        });
+
+        document.getElementById("answerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const questionSelect = document.getElementById("questionSelect");
+            const selectedQuestion = questionSelect.options[questionSelect.selectedIndex].text;
+            const answer = document.getElementById("answer").value;
+            // You can associate the answer with the selected question and store it in a database
+            // For now, let's just display it alongside the question
+            const qaList = document.getElementById("qaList");
+            const listItem = document.createElement("li");
+            listItem.textContent = `Question: ${selectedQuestion} - Answer: ${answer}`;
+            qaList.appendChild(listItem);
+            document.getElementById("answer").value = ""; // Clear the input field
+        });
+    </script>
+</body>
+</html>
